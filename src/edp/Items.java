@@ -1,27 +1,27 @@
 public abstract class Items {
-    private int key;
-    private String value;
+    private String key;
+    private Object value;
 
     //Tenemos que revisar esto, ya que el hecho de que solo podamos almacenar Strings y ints no está bien, pero por algo podemos empezar.
 
-    public Items(int inputKey, String inputValue) {
+    public Items(String inputKey, Object inputValue) {
         key = inputKey;
         value = inputValue;
     }
 
-    public void setKey(int newKey){
+    public void setKey(String newKey){
         key = newKey;
     }
 
-    public int getKey() {
+    public String getKey() {
         return key;
     }
 
-    public void setValue(String newValue) {
+    public void setValue(Object newValue) {
         value = newValue;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
