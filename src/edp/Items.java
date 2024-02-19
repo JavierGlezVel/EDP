@@ -1,7 +1,7 @@
 package edp;
 
 public abstract class Items {
-    private String key;
+    private Object key;
     private Object value;
 
     //Tenemos que revisar esto, ya que el hecho de que solo podamos almacenar Strings y ints no está bien, pero por algo podemos empezar.
@@ -15,7 +15,7 @@ public abstract class Items {
         key = newKey;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
