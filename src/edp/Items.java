@@ -1,14 +1,18 @@
 package edp;
 
-public abstract class Items {
+private static abstract class Items {
     private Object key;
     private Object value;
+    private int hashCode;
+    private int next;
 
     //Tenemos que revisar esto, ya que el hecho de que solo podamos almacenar Strings y ints no está bien, pero por algo podemos empezar.
 
-    public Items(String inputKey, Object inputValue) {
+    public Items(String inputKey, Object inputValue, int inputHashCode, int inputNext) {
         key = inputKey;
         value = inputValue;
+        hashCode = inputHashCode;
+        next = inputNext;
     }
 
     public void setKey(String newKey){
