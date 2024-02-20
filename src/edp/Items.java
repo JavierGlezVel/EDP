@@ -11,8 +11,6 @@ private static abstract class Items {
     public Items(String inputKey, Object inputValue, int inputHashCode, int inputNext) {
         key = inputKey;
         value = inputValue;
-        hashCode = inputHashCode;
-        next = inputNext;
     }
 
     public void setKey(String newKey){
