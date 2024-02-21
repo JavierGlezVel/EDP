@@ -1,10 +1,10 @@
 package edp;
 
-private static abstract class Items {
+public abstract class Items {
     private Object key;
     private Object value;
 
-    public Items(String inputKey, Object inputValue) {
+    public Items(Object inputKey, Object inputValue) {
         key = inputKey;
         value = inputValue;
     }

@@ -4,8 +4,9 @@ public class Dic extends Items {
     private Items[] items;
     private int size;
 
-    public Dic() {
-        dic = new Items[100];
+    public Dic(Object inputValue, Object inputKey) {
+        super(inputValue, inputKey);
+        items = new Items[100];
         size = 0;
     }
 
@@ -22,24 +23,24 @@ public class Dic extends Items {
 
     public void add(Object key, Object value) {
         int index = hash(key);
-        while (items[index] != null && !items[index].key.equals(key)) {
+        while (items[index] != null && !items[index].getKey().equals(key)) {
             index = (index + 1) % items.length;
         }
-        items[index] = new Items(key, value);
+        items[index] = new Dic(key, value);
         size++;
-        if (size < items.length() % 0.75) {
+        if (size < items.length % 0.75) {
             rehash();
         }
     }
 
     private void rehash() {
         Items[] oldItems = items;
-        items = new Items(oldItems * 2);
+        items = new Items[oldItems.length * 2];
         size = 0;
 
         for (Items item : oldItems) {
             if (item != null) {
-                put(item.key, item.value);
+                add(item.getKey(), item.getValue());
             }
         }
     }
@@ -58,4 +59,9 @@ public class Dic extends Items {
             }
         }
     }
+
+    public void printDic() {
+
+    }
+
 }
