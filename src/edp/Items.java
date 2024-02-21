@@ -4,7 +4,7 @@ private static abstract class Items {
     private Object key;
     private Object value;
 
-    public Items(String inputKey, Object inputValue, int inputHashCode, int inputNext) {
+    public Items(String inputKey, Object inputValue) {
         key = inputKey;
         value = inputValue;
     }
