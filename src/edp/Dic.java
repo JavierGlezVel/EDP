@@ -61,7 +61,18 @@ public class Dic extends Items {
     }
 
     public void printDic() {
+        for (int i = 0; i < size; i++) {
+            System.out.println("Key: " + items[i].getKey() + ", Valor: " + items[i].getValue());
+        }
+    }
 
+    public boolean containsKey(Object key) {
+        for (int i = 0; i < size; i++) {
+            if (items[i].getKey() == key) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
