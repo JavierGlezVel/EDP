@@ -1,7 +1,7 @@
 package edp;
 
 public class Dic extends Items {
-    private Items[] items;
+    private Items[] items
     private int size;
 
     public Dic(Object inputValue, Object inputKey) {
@@ -75,4 +75,5 @@ public class Dic extends Items {
         return false;
     }
 
+    
 }
