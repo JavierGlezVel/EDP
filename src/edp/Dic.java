@@ -2,12 +2,11 @@ package edp;
 
 import edp.Excepciones.IndexOutOfRangeException;
 
-public class Dic extends Items {
+public class Dic {
     private Items[] items;
     private int size;
 
-    public Dic(Object inputValue, Object inputKey) {
-        super(inputValue, inputKey);
+    public Dic() {
         items = new Items[100];
         size = 0;
     }
@@ -32,7 +31,7 @@ public class Dic extends Items {
         while (items[index] != null && !items[index].getKey().equals(key)) {
             index = (index + 1) % items.length;
         }
-        items[index] = new Dic(key, value);
+        items[index] = new Items(key, value);
         size++;
         if (size < items.length % 0.75) {
             rehash();
@@ -66,7 +65,7 @@ public class Dic extends Items {
 
         boolean keyFound = false;
         for (int i = 0; i < size; i++) {
-            if (items[i].getKey() == key) {
+            if (items[i].getKey().equals(key)) {
                 items[i] = items[size - 1];
                 size--;
                 keyFound = true;
@@ -93,7 +92,7 @@ public class Dic extends Items {
 
     public boolean containsKey(Object key) {
         for (int i = 0; i < size; i++) {
-            if (items[i].getKey() == key) {
+            if (items[i] != null && items[i].getKey().equals(key)) {
                 return true;
             }
         }

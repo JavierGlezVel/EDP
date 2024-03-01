@@ -1,6 +1,6 @@
 package edp;
 
-public abstract class Items {
+public class Items {
     private Object key;
     private Object value;
 
@@ -9,7 +9,7 @@ public abstract class Items {
         value = inputValue;
     }
 
-    public void setKey(String newKey){
+    public void setKey(Object newKey){
         key = newKey;
     }
 
@@ -24,6 +24,4 @@ public abstract class Items {
     public Object getValue() {
         return value;
     }
-
-    public abstract void printDic();
 }
