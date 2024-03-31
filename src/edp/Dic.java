@@ -1,6 +1,6 @@
 package edp;
 
-import edp.Excepciones.IndexOutOfRangeException;
+import java.util.Objects;
 
 public class Dic {
     private Items[] items;
@@ -28,12 +28,12 @@ public class Dic {
         }
 
         int index = hash(key);
-        while (items[index] != null && !items[index].getKey().equals(key)) {
+        while (items[index] != null) {
             index = (index + 1) % items.length;
         }
         items[index] = new Items(key, value);
         size++;
-        if (size < items.length % 0.75) {
+        if (size > items.length * 0.75) {
             rehash();
         }
     }
@@ -41,20 +41,20 @@ public class Dic {
     private void rehash() {
         Items[] oldItems = items;
         items = new Items[oldItems.length * 2];
+        int oldSize = size;
         size = 0;
 
-        for (Items item : oldItems) {
-            if (item != null) {
+        for (int i = 0; i < oldSize; i++) {
+            if (oldItems[i] != null) {
                 try{
-                    add(item.getKey(), item.getValue());
+                    add(oldItems[i].getKey(), oldItems[i].getValue());
                 } catch (Excepciones.DuplicateKeyException e){
-                    System.out.println("Error encontrado: Clave duplicado durante el rehash");
+                    throw new RuntimeException("Error encontrado: Clave duplicado durante el rehash", e);
                 }
             }
         }
     }
 
-    //Mirar de nuevo este metodo.
     public void remove(Object key) throws Excepciones.KeyNotFoundException, Excepciones.EmptyDictionaryException{
         if (key == null) {
             return;
@@ -64,9 +64,9 @@ public class Dic {
         }
 
         boolean keyFound = false;
-        for (int i = 0; i < size; i++) {
-            if (items[i].getKey().equals(key)) {
-                items[i] = items[size - 1];
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null && items[i].getKey().equals(key)) {
+                items[i] = null;
                 size--;
                 keyFound = true;
                 break;
@@ -78,25 +78,43 @@ public class Dic {
     }
 
     public void printDic() {
-        try{
-            for (int i = 0; i < size; i++) {
-                if (items[i] == null){
-                    throw new Excepciones.IndexOutOfRangeException("El elemento " + i + " es nulo.");
-                }
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
                 System.out.println("Key: " + items[i].getKey() + ", Valor: " + items[i].getValue());
             }
-        } catch (Excepciones.IndexOutOfRangeException e){
-            System.out.println("El error es: " + e.getMessage());
         }
     }
 
     public boolean containsKey(Object key) {
-        for (int i = 0; i < size; i++) {
-            if (items[i] != null && items[i].getKey().equals(key)) {
+        for (Items item : items) {
+            if (item != null && Objects.equals(item.getKey(), key)) {
                 return true;
             }
         }
         return false;
     }
-
+    
+    public String getKey(Object key) {
+        for (Items item : items) {
+            if (item != null && item.getValue().equals(key)) {
+                return item.getKey().toString();
+            }
+        }
+        return null;
+    }
+    
+    public String getItem(Object key) {
+        for (Items item : items) {
+            if (item != null && item.getKey().equals(key)) {
+                return item.getValue().toString();
+            }
+        }
+        return null;
+    }
+    
+    
+    public int size() {
+        return size;
+    }
 }
+
